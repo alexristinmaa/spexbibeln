@@ -5,7 +5,8 @@ import GroupBox from "./list";
 import { Raleway } from "next/font/google";
 
 const raleway = Raleway({
-  weight: "700"
+  weight: "700",
+  subsets: ['latin']
 });
 
 export default async function Home() {
