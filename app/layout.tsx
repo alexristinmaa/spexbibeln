@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 };
 
 const raleway = Raleway({
-  weight: "800"
+  weight: "800",
+  subsets: ["latin"]
 });
 
 export default function RootLayout({
