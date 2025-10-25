@@ -36,7 +36,7 @@ export default function Spex({spex, spexID}: {spex: Group, spexID: String}) {
                     if(!hasVT && !hasHT) return true;
                     return false;
                 }).map(
-                    song => <SongBox key={song.id} song={song} spexID={spexID} spex={spex}></SongBox>
+                    song => <SongBox key={song.id + song.edition} song={song} spexID={spexID} spex={spex}></SongBox>
                 )
                 }
             </div>
