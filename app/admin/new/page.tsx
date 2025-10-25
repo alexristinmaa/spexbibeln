@@ -43,15 +43,15 @@ export default function Home() {
         if(selected == "newSpex") {
             // Create a new spex, then add the new song
 
-            addGroup(spexName.replaceAll(" ", "-").toLowerCase(), {
+            addGroup(spexName.replaceAll(" ", "-").normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase(), {
                 name: spexName,
                 year: parseInt(spexYear),
                 eller: spexNameEller,
                 color: "",
                 songs: []
             }).then(() => {
-                addSong(spexName.replaceAll(" ", "-").toLowerCase(), {
-                    id: songName.replaceAll(" ", "-"),
+                addSong(spexName.replaceAll(" ", "-").normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase(), {
+                    id: songName.replaceAll(" ", "-").normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase(),
                     name: songName,
                     comments: "",
                     lyrics: songLyrics,
@@ -64,10 +64,17 @@ export default function Home() {
 
         // Just add the song to the selected id
 
-        
+        addSong(selected, {
+            id: songName.replaceAll(" ", "-").normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase(),
+            name: songName,
+            comments: "",
+            lyrics: songLyrics,
+            melody: songMelody,
+            edition: selectedEdition
+        });
     }
 
-    const spex = getGroups()
+    getGroups()
         .then(groups => {
             setSpexNames(groups.map(group => {
                 return {name: group.data.name, id: group.id}

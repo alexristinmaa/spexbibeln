@@ -22,14 +22,11 @@ export async function generateStaticParams() {
 export default async function Page({ params }: {params: Promise<{spex: string, song: string}>}) {
   const { spex, song } = await params;
 
-  const decodedSpex = decodeURIComponent(decodeURIComponent(spex));
-  const decodedSong = decodeURIComponent(decodeURIComponent(song));
-
-  const spexData = await getGroup(decodedSpex);
+  const spexData = await getGroup(spex);
 
   console.log();
 
-  const songData = spexData!.songs.find((s) => s.id.toLowerCase() == decodedSong.toLowerCase())!;
+  const songData = spexData!.songs.find((s) => s.id.toLowerCase() == song.toLowerCase())!;
 
   return (
     <div className={styles.main}>
