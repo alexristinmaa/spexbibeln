@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { getGroups } from "./util";
 import GroupBox from "./list";
 import { Raleway } from "next/font/google";
+import Link from "next/link";
 
 const raleway = Raleway({
   weight: "700",
@@ -15,9 +16,8 @@ export default async function Home() {
   return (
     <>
       <div className={`${styles.blocks} ${raleway.className}`}>
-        <div>FAVORITER</div>
         <div>RANDOM</div>
-        <div>EXTRA</div>
+        <Link href="/spex/ovrigt"><div>EXTRA</div></Link>
       </div>
         <div className={styles.finder}>
           <div className={styles.search}>
