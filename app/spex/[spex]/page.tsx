@@ -5,7 +5,7 @@ export async function generateStaticParams() {
   const groups = await getGroups();
 
   return groups.map((group) => ({
-    spex: group.id
+    spex: encodeURIComponent(group.id)
   }))
 }
 
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: {params: Promise<{spex: string}>}) {
   const { spex } = await params;
 
-  const spexData = await getGroup(spex);
+  const spexData = await getGroup(decodeURIComponent(spex));
 
   // TODO: Real error
   if(spexData == undefined) return "Something has gone wrong.";

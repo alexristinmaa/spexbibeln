@@ -11,8 +11,8 @@ export async function generateStaticParams() {
   console.log(songs)
 
   return songs.map((song) => ({
-    spex: song.spex,
-    song: song.song
+    spex: encodeURIComponent(song.spex),
+    song: encodeURIComponent(song.song)
   }))
 }
 
@@ -22,9 +22,14 @@ export async function generateStaticParams() {
 export default async function Page({ params }: {params: Promise<{spex: string, song: string}>}) {
   const { spex, song } = await params;
 
-  const spexData = await getGroup(decodeURIComponent(spex));
+  const decodedSpex = decodeURIComponent(decodeURIComponent(spex));
+  const decodedSong = decodeURIComponent(decodeURIComponent(song));
 
-  const songData = spexData!.songs.find((s) => decodeURIComponent(s.id).toLowerCase() == song.toLowerCase())!;
+  const spexData = await getGroup(decodedSpex);
+
+  console.log();
+
+  const songData = spexData!.songs.find((s) => s.id.toLowerCase() == decodedSong.toLowerCase())!;
 
   return (
     <div className={styles.main}>
