@@ -1,5 +1,43 @@
 .main {
     display: flex;
     flex-direction: column;
-    padding: 1em 5em;
+    padding: 1em 0em;
+    gap: 1em;
+    max-width: 600px;
+    width: 80%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0em;
+    gap: 1em;
+}
+
+.spex {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.pair {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.pair > input {
+
+    flex: 1;
+}
+
+.songName {
+    width: 100%;
+    height: 2em;
+}
+
+.lyrics {
+    width: 100%;
+    height: 400px;
 }

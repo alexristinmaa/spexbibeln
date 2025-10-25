@@ -22,13 +22,13 @@ export async function generateStaticParams() {
 export default async function Page({ params }: {params: Promise<{spex: string, song: string}>}) {
   const { spex, song } = await params;
 
-  const spexData = (await getGroup(spex))!;
+  const spexData = await getGroup(decodeURIComponent(spex));
 
-  const songData = spexData?.songs.find((s) => s.id == song)!;
+  const songData = spexData!.songs.find((s) => decodeURIComponent(s.id).toLowerCase() == song.toLowerCase())!;
 
   return (
     <div className={styles.main}>
-        <p>från <u><Link href={`/spex/${spex}`}>{spexData.name}</Link></u></p>
+        <p>från <u><Link href={`/spex/${spex}`}>{spexData!.name}</Link></u></p>
         <h1>{songData.name}</h1>
         <p className={styles.melody}>Melodi: {songData.melody}</p>
         <p className={styles.lyrics}>{songData.lyrics}</p>

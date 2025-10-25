@@ -1,6 +1,6 @@
 // utils/db
 
-import firestore, { getFirestore, collection, doc, getDocs, getDoc } from "firebase/firestore"
+import firestore, { getFirestore, collection, doc, getDocs, getDoc, addDoc, updateDoc, arrayUnion, setDoc } from "firebase/firestore"
 import { app } from "./firebase";
 import { Song, Group, DBSong, DBGroup } from "./types";
 
@@ -25,9 +25,18 @@ const getGroups = async () => {
   return (await getDocs(db.groups)).docs.map(doc => ({data: doc.data(), id: doc.id} as DBGroup));
 }
 
-
 const getGroup = async (id: string) => {
   return (await getDoc(db.group(id))).data()
 }
 
-export { getGroups, getGroup }
+const addSong = async (groupId: string, song: Song) => {
+  return await updateDoc(db.group(groupId), {
+    songs: arrayUnion(song)
+  });
+}
+
+const addGroup = async (groupId: string, group: Group) => {
+  return await setDoc(db.group(groupId), group);
+}
+
+export { getGroups, getGroup, addSong, addGroup }
