@@ -6,9 +6,7 @@ import Link from "next/link";
 export async function generateStaticParams() {
   const groups = await getGroups();
 
-  const songs = groups.map(group => group.data.songs.map(song => ({spex: group.id, song: song.id}))).flat();
- 
-  console.log(songs)
+  const songs = groups.map(group => group.data.songs.map(song => ({spex: group.id, song: song.id, edition: song.edition}))).flat();
 
   return songs.map((song) => ({
     spex: encodeURIComponent(song.spex),

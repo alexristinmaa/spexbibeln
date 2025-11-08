@@ -5,6 +5,28 @@
   align-items: center;
 }
 
+@media (max-width: 600px) {
+  .blocks {
+    gap: 0.5em;
+    padding-top: 1.5em;
+  }
+
+
+  .blocks > div {
+    flex: 1 !important;
+    font-size: 0.9em !important;
+    width: 100px !important;
+    padding: 0.5em !important;
+  }
+
+  .blocks > * > div {
+    flex: 1 !important;
+    font-size: 0.9em !important;
+    width: 100px !important;
+    padding: 0.5em !important;
+  }
+}
+
 .blocks > div {
   height: 60px;
   width: 300px;
@@ -16,7 +38,26 @@
   text-align: center;
   color: var(--white);
   font-size: 1.5em;
+  border-radius: 20px;
+}
+
+.blocks > div:hover {
+  cursor: pointer;
+}
+
+.blocks > * > div {
+  height: 60px;
+  width: 300px;
+  background-color: var(--red);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  font-size: 1.5em;
   border-radius: 4px;
+  border-radius: 20px;
 }
 
 .finder {

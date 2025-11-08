@@ -7,7 +7,7 @@ function SongBox({song, spex, spexID}: {song: Song, spex: Group, spexID: String}
     <Link href={`/spex/${spexID}/${song.id}`}>
       <div className={`${styles.group}`}>
         <p className={styles.groupTitle}>{song.name}</p>
-        <p className={styles.groupInfo}>{song.edition} - {song.melody}</p>
+        <p className={styles.groupInfo}>{Number.isNaN(spex.year) ? "" : `${song.edition} - `}{song.melody}</p>
       </div>
     </Link>
   )

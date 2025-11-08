@@ -7,12 +7,13 @@ import { useState } from "react";
 import SongBox from "./list";
 
 export default function Spex({spex, spexID}: {spex: Group, spexID: String}) {
-    const [hasVT, setVT] = useState(false);
-    const [hasHT, setHT] = useState(false);
+    const hasAnyHT = spex.songs.filter(song => song.edition == "HT").length > 0 && !Number.isNaN(spex.year);
+    const hasAnyVT = spex.songs.filter(song => song.edition == "VT").length > 0 && !Number.isNaN(spex.year);
 
-    let toggleFilter = (filter: String) => {
-        if(filter == "VT") setVT(!hasVT);
-        else setHT(!hasHT);
+    const [hasVT, setVT] = useState(hasAnyVT);
+
+    let toggleFilter = () => {
+        setVT(!hasVT);
     }
 
     return (
@@ -21,8 +22,18 @@ export default function Spex({spex, spexID}: {spex: Group, spexID: String}) {
                 <h1 className={styles.spexTitle}>{spex.name}</h1>
                 <p className={styles.subTitle}>{spex.eller}</p>
                 <div className={styles.pillBox}>
-                    <p className={`${styles.pill} ${hasVT ? styles.selected : ""}`} onClick={() => toggleFilter("VT")}>VT{spex.year}</p>
-                    <p className={`${styles.pill} ${hasHT ? styles.selected : ""}`} onClick={() => toggleFilter("HT")}>HT{spex.year}</p>
+                    {
+                        hasAnyVT ?
+                            <p style={{backgroundColor: "#" + spex.color, borderColor:  "#" + spex.color}} className={`${styles.pill} ${hasVT ? styles.selected : ""}`} onClick={() => toggleFilter()}>VT{spex.year}</p>
+                        :
+                        ""
+                    }
+                    {
+                        hasAnyHT ?
+                            <p style={{backgroundColor: "#" + spex.color, borderColor:  "#" + spex.color}} className={`${styles.pill} ${!hasVT ? styles.selected : ""}`} onClick={() => toggleFilter()}>HT{spex.year}</p>
+                        :
+                        ""
+                    }
                 </div>
                 <br></br>
                 <hr></hr>
@@ -32,8 +43,7 @@ export default function Spex({spex, spexID}: {spex: Group, spexID: String}) {
                 {
                 spex.songs.filter(song => {
                     if(song.edition == "VT" && hasVT) return true;
-                    if(song.edition == "HT" && hasHT) return true;
-                    if(!hasVT && !hasHT) return true;
+                    if(song.edition == "HT" && !hasVT) return true;
                     return false;
                 }).map(
                     song => <SongBox key={song.id + song.edition} song={song} spexID={spexID} spex={spex}></SongBox>
