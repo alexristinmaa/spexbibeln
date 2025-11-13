@@ -7,10 +7,12 @@ function GroupBox({group}: {group: DBGroup}) {
 
   return (
     <Link href={`/spex/${group.id}`}>
-      <div className={`${styles.group}`}>
-      <p className={styles.groupTitle}>{groupData.name}</p>
-      <p className={styles.groupInfo}>Spex - {groupData.year ? groupData.year: "Alla"}</p>
-    </div>
+      <a>
+        <div className={`${styles.group}`}>
+          <p className={styles.groupTitle}>{groupData.name}</p>
+          <p className={styles.groupInfo}>Spex - {groupData.year ? groupData.year: "Alla"}</p>
+        </div>
+      </a>
     </Link>
     
   )

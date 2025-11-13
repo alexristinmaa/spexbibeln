@@ -28,14 +28,14 @@ function Blocks({groups}: {groups: DBGroup[]}) {
     let goToRandom = () => {
         let songs = groups.map(group => group.data.songs.map(song => {
         return {
-            song: song.id, 
-            spex: group.id
+            songID: song.id, 
+            spexID: group.id
         }
         })).flat();
         
         let song = songs[Math.floor(Math.random()*songs.length)];
 
-        redirect(`spex/${song.spex}/${song.song}`);
+        redirect(`spex/${song.spexID}/${song.songID}`);
     }
     
     return (
