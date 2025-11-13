@@ -20,8 +20,6 @@ function Blocks({groups}: {groups: DBGroup[]}) {
 
     let alertMessage = () => {
         alert(messages[messageIndex]);
-
-
         setMessageIndex(Math.min((messageIndex + 1), messages.length - 1));
     }
 

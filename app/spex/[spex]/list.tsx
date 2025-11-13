@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./list.module.css";
 import { Group, Song } from "@/app/types";

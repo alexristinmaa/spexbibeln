@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./list.module.css";
 import { DBGroup } from "./types";
@@ -7,12 +9,10 @@ function GroupBox({group}: {group: DBGroup}) {
 
   return (
     <Link href={`/spex/${group.id}`}>
-      <a>
         <div className={`${styles.group}`}>
           <p className={styles.groupTitle}>{groupData.name}</p>
           <p className={styles.groupInfo}>Spex - {groupData.year ? groupData.year: "Alla"}</p>
         </div>
-      </a>
     </Link>
     
   )
