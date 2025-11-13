@@ -1,7 +1,5 @@
 import { getGroup, getGroups } from "@/app/util"
 
-import styles from './style.module.css';
-import Link from "next/link";
 import Song from "./song";
 
 export async function generateStaticParams() {

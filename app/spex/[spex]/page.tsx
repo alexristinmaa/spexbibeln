@@ -16,8 +16,5 @@ export default async function Page({ params }: {params: Promise<{spex: string}>}
 
   const spexData = await getGroup(spex);
 
-  // TODO: Real error
-  if(spexData == undefined) return "Something has gone wrong.";
-
-  return <Spex spex={spexData} spexID={spex}/>
+  return <Spex spex={spexData!} spexID={spex}/>
 }
