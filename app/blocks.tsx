@@ -7,12 +7,24 @@ import { Raleway } from "next/font/google";
 import { DBGroup, Group } from './types';
 import { redirect } from 'next/navigation';
 
+import {messages} from './favoriterDialog';
+import { useState } from 'react';
+
 const raleway = Raleway({
   weight: "700",
   subsets: ['latin']
 });
 
-function Blocks({groups}: {groups: DBGroup[]}) {
+function Blocks({groups}: {groups: DBGroup[]}) { 
+    const [messageIndex, setMessageIndex] = useState(0);
+
+    let alertMessage = () => {
+        alert(messages[messageIndex]);
+
+
+        setMessageIndex(Math.min((messageIndex + 1), messages.length - 1));
+    }
+
     let goToRandom = () => {
         let songs = groups.map(group => group.data.songs.map(song => {
         return {
@@ -28,7 +40,7 @@ function Blocks({groups}: {groups: DBGroup[]}) {
     
     return (
         <div className={`${styles.blocks} ${raleway.className}`}>
-            <div>FAVORITER</div>
+            <div onClick={alertMessage}>FAVORITER</div>
             <div onClick={goToRandom}>RANDOM</div>
             <Link href='/spex/ovriga'><div>EXTRA</div></Link>
         </div>

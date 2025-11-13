@@ -2,6 +2,7 @@ import { getGroup, getGroups } from "@/app/util"
 
 import styles from './style.module.css';
 import Link from "next/link";
+import Song from "./song";
 
 export async function generateStaticParams() {
   const groups = await getGroups();
@@ -22,16 +23,9 @@ export default async function Page({ params }: {params: Promise<{spex: string, s
 
   const spexData = await getGroup(spex);
 
-  console.log();
-
   const songData = spexData!.songs.find((s) => s.id.toLowerCase() == song.toLowerCase())!;
 
   return (
-    <div className={styles.main}>
-        <p>från <u><Link href={`/spex/${spex}`}>{spexData!.name}</Link></u></p>
-        <h1>{songData.name}</h1>
-        <p className={styles.melody}>Melodi: {songData.melody}</p>
-        <p className={styles.lyrics}>{songData.lyrics}</p>
-    </div>
+    <Song song={songData} spex={spexData!} spexID={spex}></Song>
   )
 }

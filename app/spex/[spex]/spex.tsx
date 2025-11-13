@@ -18,19 +18,25 @@ export default function Spex({spex, spexID}: {spex: Group, spexID: String}) {
 
     return (
         <div className={styles.main}>
+            {spex.color != "" ? <meta name="theme-color" content={"#" + spex.color}></meta> : ""}
+            <style global jsx>{`
+                body {
+                    ${spex.color == "" ? "": "--red: #" + spex.color + "!important;"}
+                }
+            `}</style>
             <div>
                 <h1 className={styles.spexTitle}>{spex.name}</h1>
                 <p className={styles.subTitle}>{spex.eller}</p>
                 <div className={styles.pillBox}>
                     {
                         hasAnyVT ?
-                            <p style={{backgroundColor: "#" + spex.color, borderColor:  "#" + spex.color}} className={`${styles.pill} ${hasVT ? styles.selected : ""}`} onClick={() => toggleFilter()}>VT{spex.year}</p>
+                            <p className={`${styles.pill} ${hasVT ? styles.selected : ""}`} onClick={() => toggleFilter()}>VT{spex.year}</p>
                         :
                         ""
                     }
                     {
                         hasAnyHT ?
-                            <p style={{backgroundColor: "#" + spex.color, borderColor:  "#" + spex.color}} className={`${styles.pill} ${!hasVT ? styles.selected : ""}`} onClick={() => toggleFilter()}>HT{spex.year}</p>
+                            <p className={`${styles.pill} ${!hasVT ? styles.selected : ""}`} onClick={() => toggleFilter()}>HT{spex.year}</p>
                         :
                         ""
                     }
