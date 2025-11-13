@@ -1,3 +1,5 @@
+"use client";
+
 import { app } from "@/app/firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from 'next/navigation'
