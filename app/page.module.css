@@ -41,6 +41,15 @@
   border-radius: 20px;
 }
 
+
+.blocks > div:nth-child(2) {
+  background-color: var(--blue);
+}
+
+.blocks > *:nth-child(3) > div {
+  background-color: var(--purple);
+}
+
 .blocks > div:hover {
   cursor: pointer;
 }
