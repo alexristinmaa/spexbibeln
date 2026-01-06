@@ -5,7 +5,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
-
 export default function Login() {
     const auth = getAuth(app);
     const router = useRouter();
