@@ -1,0 +1,40 @@
+.field {
+    padding: 0.25em;
+    border: 1px solid gray;
+    color: var(--foreground);
+    background-color: transparent;
+    width: 250px;
+}
+
+.field:disabled {
+    border: none !important;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.row > input {
+    flex: 1;
+}
+
+.row > textarea {
+    flex: 1;
+    height: 50rem;
+    resize: vertical;
+}
+
+.row > textarea:disabled {
+    border: 1px solid lightgray !important;
+}
+
+.icon {
+    width: 15px;
+}
+
+.doubleIcon {
+    display: flex;
+    gap: 0.25em;
+}

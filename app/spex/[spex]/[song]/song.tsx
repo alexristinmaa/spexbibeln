@@ -15,7 +15,7 @@ export default function Spex({song, spex, spexID}: {song: Song, spex: Group, spe
             `}</style>
             <p>från <u><Link href={`/spex/${spexID}`}>{spex.name}</Link></u></p>
             <h1>{song.name}</h1>
-            <p className={styles.melody}>Melodi: {song.melody}</p>
+            {song.melody ? <p className={styles.melody}>Melodi: {song.melody}</p> : ""}
             <p className={styles.lyrics}>{song.lyrics}</p>
         </div>
     );

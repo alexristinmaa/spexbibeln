@@ -1,0 +1,45 @@
+.main {
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spexList {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.listItem {
+    display: flex;
+    justify-content: space-between
+}
+
+.listIcon {
+    display: flex;
+    gap: 0.5em;
+}
+
+.listIcon > * {
+    padding: 0.25em 0.5em;
+    border-radius: 10px;
+    border: 1px solid coral;
+    height: fit-content;
+}
+
+.listIcon > span:hover {
+    cursor: pointer;
+}
+
+.edit {
+    color: #d8a847;
+}
+
+.delete {
+    color: #ff3822;
+}

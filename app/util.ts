@@ -39,4 +39,26 @@ const addGroup = async (groupId: string, group: Group) => {
   return await setDoc(db.group(groupId), group);
 }
 
-export { getGroups, getGroup, addSong, addGroup }
+const updateSong = async (groupId: string, song: Partial<Song>) => {
+  const group = await getGroup(groupId)
+  console.log(group!.songs)
+
+  const index = group!.songs.findIndex(s => s.id == song.id && s.edition == song.edition)
+  console.log(index)
+  const newSongs = [...(group!.songs)]
+
+  newSongs[index] = {...newSongs[index], ...song} // Combine the two, using the new fields from the updates
+
+  await updateDoc(
+    db.group(groupId), 
+    {
+      songs: newSongs
+    }
+  )
+}
+
+const updateGroup = async (groupId: string, group: Partial<Group>) => {
+  return await updateDoc(db.group(groupId), group)
+}
+
+export { getGroups, getGroup, addSong, addGroup, updateSong, updateGroup}

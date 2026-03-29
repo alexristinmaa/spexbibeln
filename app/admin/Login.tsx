@@ -17,9 +17,6 @@ export default function Login() {
         console.log(email)
 
         signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                router.push("/admin/new")
-            })
             .catch(error => {
                 setStatus(status + JSON.stringify(error));
             })
