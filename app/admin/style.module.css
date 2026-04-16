@@ -15,31 +15,247 @@
     gap: 1em;
 }
 
+/* ── List Items ── */
 .listItem {
-    display: flex;
-    justify-content: space-between
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1.25em;
+  background: #fff;
+  border: 1px solid #e4e2dc;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.15s, transform 0.1s;
+}
+
+.listItem:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.listItem h4 {
+  margin: 0 0 0.2em;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+}
+
+.listItem p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #999;
 }
 
 .listIcon {
-    display: flex;
-    gap: 0.5em;
+  display: flex;
+  gap: 0.5em;
 }
 
-.listIcon > * {
-    padding: 0.25em 0.5em;
-    border-radius: 10px;
-    border: 1px solid coral;
-    height: fit-content;
+.listIcon a {
+  text-decoration: none;
 }
 
-.listIcon > span:hover {
-    cursor: pointer;
+.edit,
+.delete {
+  display: inline-block;
+  padding: 0.35em 0.75em;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
 }
 
 .edit {
-    color: #d8a847;
+  color: #d8a847;
+  border-color: #d8a847;
+  background: transparent;
+}
+
+.edit:hover {
+  background: #d8a847;
+  color: #fff;
 }
 
 .delete {
-    color: #ff3822;
+  color: #ff3822;
+  border-color: #ff3822;
+  background: transparent;
+}
+
+.delete:hover {
+  background: #ff3822;
+  color: #fff;
+}
+
+/* ── Login ── */
+.loginWrapper {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginCard {
+  background: #fff;
+  border: 1px solid #e4e2dc;
+  border-radius: 16px;
+  padding: 2.5em 2.25em;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.loginLogo {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+  opacity: 0.6;
+}
+
+.loginTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  margin: 0 0 0.25em;
+}
+
+.loginSubtitle {
+  font-size: 0.875rem;
+  color: #888;
+  margin: 0;
+}
+
+.loginFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.fieldLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.fieldInput {
+  padding: 0.65em 0.85em;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fieldInput:focus {
+  border-color: coral;
+  box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.12);
+  background: #fff;
+}
+
+.loginError {
+  font-size: 0.82rem;
+  color: #e03131;
+  margin: 0;
+}
+
+.loginButton {
+  margin-top: 0.5em;
+  padding: 0.75em;
+  background: coral;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.loginButton:hover {
+  background: #ff6b47;
+}
+
+.loginButton:active {
+  transform: scale(0.98);
+}
+
+.loginButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Top bar / Sign out ── */
+.topBar {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #e4e2dc;
+}
+
+.topBarTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+}
+
+.signOutButton {
+  padding: 0.4em 0.9em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #888;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.signOutButton:hover {
+  color: #ff3822;
+  border-color: #ff3822;
+}
+
+.topBarButtons {
+  display: flex;
+  gap: 0.5em;
+}
+
+.commitButton {
+  padding: 0.4em 0.9em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: coral;
+  background: transparent;
+  border: 1px solid rgb(247, 200, 184);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.commitButton:hover {
+  color: rgb(240, 107, 59);
+  border-color: rgb(253, 147, 112);
 }

@@ -18,7 +18,6 @@ export default function Admin() {
     }, [])
 
     const auth = getAuth(app);
-    
 
     onAuthStateChanged(auth, (user) => {
         setAuth(user != null ? "authenticated" : "notLoggedIn");
@@ -32,16 +31,37 @@ export default function Admin() {
         return <Login ></Login>
     }
 
+    const refresh = async () => {
+        const token = await auth.currentUser?.getIdToken();
+        const res = await fetch("/api/redeploy", {
+            method: "POST",
+            headers: {
+            Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if(!res.ok) return alert("Error: Failed refresh")
+
+        alert("Website is refreshing, ~1min until change is live")
+    };
+
     return (
         <div className={style.main}>
-            <button onClick={() => auth.signOut()}>Log out</button>
+            <div className={style.topBar}>
+            <span className={style.topBarTitle}>Admin Panel</span>
+            <div className={style.topBarButtons}>
+                <button className={style.commitButton} onClick={(() => refresh())}>
+                    Commit changes
+                </button>
+                <button className={style.signOutButton} onClick={() => auth.signOut()}>
+                    Sign out
+                </button>
+            </div>
+            </div>
             <div className={style.spexList}>
-                {spex?.map(spex => 
-                    <ListItem 
-                        key={spex.id} 
-                        spex={spex}
-                    />
-                )}
+            {spex?.map(spex =>
+                <ListItem key={spex.id} spex={spex} />
+            )}
             </div>
         </div>
     )

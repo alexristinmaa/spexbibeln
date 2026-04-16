@@ -14,31 +14,71 @@
     gap: 1em;
 }
 
+/* ── List Items ── */
 .listItem {
-    display: flex;
-    justify-content: space-between
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1.25em;
+  background: #fff;
+  border: 1px solid #e4e2dc;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.15s, transform 0.1s;
+}
+
+.listItem:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.listItem p {
+  margin: 0 0 0.2em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
 }
 
 .listIcon {
-    display: flex;
-    gap: 0.5em;
+  display: flex;
+  gap: 0.5em;
 }
 
-.listIcon > * {
-    padding: 0.25em 0.5em;
-    border-radius: 10px;
-    border: 1px solid coral;
-    height: fit-content;
+.listIcon a {
+  text-decoration: none;
 }
 
-.listIcon > span:hover {
-    cursor: pointer;
+.edit,
+.delete {
+  display: inline-block;
+  padding: 0.35em 0.75em;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
 }
 
 .edit {
-    color: #d8a847;
+  color: #d8a847;
+  border-color: #d8a847;
+  background: transparent;
+}
+
+.edit:hover {
+  background: #d8a847;
+  color: #fff;
 }
 
 .delete {
-    color: #ff3822;
+  color: #ff3822;
+  border-color: #ff3822;
+  background: transparent;
+}
+
+.delete:hover {
+  background: #ff3822;
+  color: #fff;
 }

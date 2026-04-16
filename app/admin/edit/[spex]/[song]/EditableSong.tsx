@@ -41,18 +41,9 @@ export default function EditableSong({spexID, spex, song} : {spexID: string, spe
             <div className={styles.loading} style={{visibility: loading ? "visible" : "hidden"}}></div>
             <h2><b>Editing:</b> <i>{song.name}</i> from {spex.name}</h2><br />
             <div className={styles.rows}>
-                <div className={styles.row}>
-                    <label>Name: </label>
-                    <EditableField initialValue={song.name} onSubmit={(s) => submitEdit({name: s})}></EditableField>
-                </div>
-                <div className={styles.row}>
-                    <label>Melody: </label>
-                    <EditableField initialValue={song.melody} onSubmit={(s) => submitEdit({melody: s})}></EditableField>
-                </div>
-                <div className={styles.row}>
-                    <label>Lyrics: </label>
-                    <EditableTextarea initialValue={song.lyrics} onSubmit={(s) => submitEdit({lyrics: s})}></EditableTextarea>
-                </div>
+                <EditableField label="Name" initialValue={song.name} onSubmit={(s) => submitEdit({name: s})}></EditableField>
+                <EditableField label="Melody" initialValue={song.melody} onSubmit={(s) => submitEdit({melody: s})}></EditableField>
+                <EditableTextarea label="Lyrics" initialValue={song.lyrics} onSubmit={(s) => submitEdit({lyrics: s})}></EditableTextarea>
             </div>
         </div>
     )

@@ -1,40 +1,75 @@
-.field {
-    padding: 0.25em;
-    border: 1px solid gray;
-    color: var(--foreground);
-    background-color: transparent;
-    width: 250px;
-}
-
-.field:disabled {
-    border: none !important;
-}
-
 .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: transparent;
+  border-radius: 8px;
+  transition: background 0.15s;
 }
 
-.row > input {
-    flex: 1;
+.row:has(.field:disabled):hover {
+  background: rgba(0, 0, 0, 0.03);
 }
 
-.row > textarea {
-    flex: 1;
-    height: 50rem;
-    resize: vertical;
+.field {
+  flex: 1;
+  padding: 0.6em 0.6em;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--foreground);
+  background: transparent;
+  border: none;
+  outline: none;
+  min-width: 0;
 }
 
-.row > textarea:disabled {
-    border: 1px solid lightgray !important;
+.field:not(:disabled) {
+  background: transparent;
+}
+
+.field:not(:disabled):focus {
+  outline: none;
+  box-shadow: none;
+}
+
+textarea.field {
+    height: 20em;
+}
+
+/* The border lives on the ROW, not the field */
+.row:has(.field:not(:disabled)) {
+  background: #fff;
+  border: 1.5px solid #e4e2dc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.row:has(.field:not(:disabled):focus-within) {
+  border-color: coral;
+  box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.12);
+}
+
+/* ── Icon buttons ── */
+.doubleIcon {
+  display: flex;
+  gap: 0.25em;
+  margin-right: 0.5em;
 }
 
 .icon {
-    width: 15px;
+  width: 15px;
 }
 
-.doubleIcon {
-    display: flex;
-    gap: 0.25em;
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #999;
+  padding-left: 0.2em;
 }
