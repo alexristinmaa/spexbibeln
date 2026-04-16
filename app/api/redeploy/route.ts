@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuth } from "firebase-admin/auth";
-import { initializeApp, getApps, cert, ServiceAccount } from "firebase-admin/app";
+import { initializeApp, getApps, cert } from "firebase-admin/app";
 
 if (!getApps().length) {
   if (process.env.USE_LOCAL_FIREBASE_CREDENTIALS) {
-    const serviceAccount = require("../../../firebase_service_account.json") as ServiceAccount;
-    initializeApp({credential: cert(serviceAccount)});
+    initializeApp({
+        credential: cert({
+            projectId: process.env.FIREBASE_PROJECT_ID,
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+            privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+        })
+    });
   } else {
     initializeApp();
   }
