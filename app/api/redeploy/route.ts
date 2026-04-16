@@ -4,8 +4,8 @@ import { initializeApp, getApps, cert, ServiceAccount } from "firebase-admin/app
 
 if (!getApps().length) {
   if (process.env.USE_LOCAL_FIREBASE_CREDENTIALS) {
-    const serviceAccount = await import("../../../firebase_service_account.json");
-    initializeApp({ credential: cert(serviceAccount as ServiceAccount) });
+    const serviceAccount = require("../../../firebase_service_account.json") as ServiceAccount;
+    initializeApp({credential: cert(serviceAccount)});
   } else {
     initializeApp();
   }
