@@ -1,5 +1,6 @@
 import { getGroup, getGroups } from "@/app/util";
 import EditableSpex from "./EditableSpex";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   const groups = await getGroups();
@@ -16,5 +17,11 @@ export default async function Page({ params }: {params: Promise<{spex: string}>}
 
   const spexData = await getGroup(spex);
 
-  return <EditableSpex spex={spexData!} spexID={spex}/>
+  return (
+    <>
+      <br />
+      <Link href={`/admin/`}>Back to the Admin page</Link>
+      <EditableSpex spex={spexData!} spexID={spex}/>
+    </>
+  )
 }

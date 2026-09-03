@@ -1,5 +1,6 @@
 import { getGroup, getGroups } from "@/app/util"
 import EditableSong from "./EditableSong";
+import Link from "next/link";
 
 
 export async function generateStaticParams() {
@@ -24,6 +25,10 @@ export default async function Page({ params }: {params: Promise<{spex: string, s
   const songData = spexData!.songs.find((s) => s.id.toLowerCase() == song.toLowerCase())!;
 
   return (
-    <EditableSong spexID={spex} spex={spexData!} song={songData} />
+    <>
+      <br />
+      <Link href={`/admin/edit/${spex}`}>Back to {spexData!.name}</Link>
+      <EditableSong spexID={spex} spex={spexData!} song={songData} />
+    </>
   )
 }

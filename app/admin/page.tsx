@@ -8,6 +8,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebase";
 import Login from "./Login";
 import { DBGroup } from "../types";
+import { httpsCallable, getFunctions, HttpsCallableResult, connectFunctionsEmulator } from "firebase/functions";
+
+const auth = getAuth(app);
+const functions = getFunctions(app);
+const redeploy = httpsCallable(functions, "redeploy");
 
 export default function Admin() {
     const [isAuth, setAuth] = useState("loading");
@@ -16,8 +21,6 @@ export default function Admin() {
     useEffect(() => {
         getGroups().then(setSpex)
     }, [])
-
-    const auth = getAuth(app);
 
     onAuthStateChanged(auth, (user) => {
         setAuth(user != null ? "authenticated" : "notLoggedIn");
@@ -32,15 +35,12 @@ export default function Admin() {
     }
 
     const refresh = async () => {
-        const token = await auth.currentUser?.getIdToken();
-        const res = await fetch("/api/redeploy", {
-            method: "POST",
-            headers: {
-            Authorization: `Bearer ${token}`,
-            },
-        });
+        const res = await redeploy() as HttpsCallableResult<{error: string, status: number}>;
 
-        if(!res.ok) return alert("Error: Failed refresh")
+        if(res.data.status != 200) {
+            alert("Website refresh failed: " + res.data.error);
+            return;
+        }
 
         alert("Website is refreshing, ~1min until change is live")
     };
