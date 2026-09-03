@@ -3,15 +3,25 @@
 import Link from "next/link";
 import style from "./ListItem.module.css"
 import { Song } from "@/app/types";
+import { deleteSong } from "@/app/util";
 
 export default function ListItem({spexID, song} : {spexID: string, song: Song}) {
-    const deleteSong = () => {
-        const songName = prompt(`Do you really want to delete the spex '${song.name}'? (Type the spex name to confirm)`)
+    const deleteSongClick = async () => {
+        const songName = prompt(`Do you really want to delete the spex '${song.name}'? (Type the song name to confirm)`)
 
         if(songName != song.name) return alert("Delete aborted");
 
         // Delete song
-        alert("Delete not implemented yet")
+        try {
+            await deleteSong(spexID, song);
+        } catch(e) {
+            alert(e);
+            alert("Om det var en permissions-error prova att logga ut och in igen");
+            return;
+        }
+
+        alert("Song deleted")
+        window.location.reload();
     }
 
     return (
@@ -19,7 +29,7 @@ export default function ListItem({spexID, song} : {spexID: string, song: Song}) 
             <p>{song.name} - {song.edition}</p>
             <div className={style.listIcon}>
                 <Link href={`/admin/edit/${spexID}/${song.id}`}><span className={style.edit}>Edit</span></Link>
-                <span className={style.delete} onClick={deleteSong}>Delete</span>
+                <span className={style.delete} onClick={deleteSongClick}>Delete</span>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getGroups } from "../util"
+import { addGroup, getGroups, normalizeName } from "../util"
 import ListItem from "./ListItem";
 import style from "./style.module.css"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -20,11 +20,13 @@ export default function Admin() {
 
     useEffect(() => {
         getGroups().then(setSpex)
+
+        onAuthStateChanged(auth, (user) => {
+            setAuth(user != null ? "authenticated" : "notLoggedIn");
+        });
     }, [])
 
-    onAuthStateChanged(auth, (user) => {
-        setAuth(user != null ? "authenticated" : "notLoggedIn");
-    });
+    
 
     if(isAuth == "loading") {
         return <p>Loading...</p>
@@ -45,13 +47,37 @@ export default function Admin() {
         alert("Website is refreshing, ~1min until change is live")
     };
 
+    const addSpex = async () => {
+        const name = prompt("Enter spex name here:");
+
+        if(!name) return;
+
+        try {
+            await addGroup(normalizeName(name), {
+                name: name,
+                year: new Date().getFullYear(),
+                eller: "",
+                color: "ffffff",
+                songs: []
+            });
+        } catch(e) {
+            alert(e);
+            alert("Om det var en permissions-error prova att logga ut och in igen");
+            return;
+        }
+
+        alert("Spex added, to be able to add to the spex - update the website with your changes")
+
+        window.location.reload();
+    }
+
     return (
         <div className={style.main}>
             <div className={style.topBar}>
             <span className={style.topBarTitle}>Admin Panel</span>
             <div className={style.topBarButtons}>
                 <button className={style.commitButton} onClick={(() => refresh())}>
-                    Commit changes
+                    Update website with changes
                 </button>
                 <button className={style.signOutButton} onClick={() => auth.signOut()}>
                     Sign out
@@ -59,9 +85,16 @@ export default function Admin() {
             </div>
             </div>
             <div className={style.spexList}>
-            {spex?.map(spex =>
-                <ListItem key={spex.id} spex={spex} />
-            )}
+                <div className={style.listItem}>
+                    <h4>New spex</h4>
+
+                    <div className={style.listIcon}>
+                        <span className={style.add} onClick={addSpex}>Add</span>
+                    </div>
+                </div>
+                {spex?.map(spex =>
+                    <ListItem key={spex.id} spex={spex} />
+                )}
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 // utils/db
 
-import firestore, { getFirestore, collection, doc, getDocs, getDoc, addDoc, updateDoc, arrayUnion, setDoc } from "firebase/firestore"
+import firestore, { getFirestore, collection, doc, getDocs, getDoc, addDoc, updateDoc, arrayUnion, setDoc, deleteDoc, arrayRemove } from "firebase/firestore"
 import { app } from "./firebase";
 import { Song, Group, DBSong, DBGroup } from "./types";
 
@@ -44,7 +44,7 @@ const updateSong = async (groupId: string, song: Partial<Song>) => {
   console.log(group!.songs)
 
   const index = group!.songs.findIndex(s => s.id == song.id && s.edition == song.edition)
-  console.log(index)
+  
   const newSongs = [...(group!.songs)]
 
   newSongs[index] = {...newSongs[index], ...song} // Combine the two, using the new fields from the updates
@@ -61,4 +61,16 @@ const updateGroup = async (groupId: string, group: Partial<Group>) => {
   return await updateDoc(db.group(groupId), group)
 }
 
-export { getGroups, getGroup, addSong, addGroup, updateSong, updateGroup}
+const deleteGroup = async (groupId: string) => {
+  return await deleteDoc(db.group(groupId))
+}
+
+const deleteSong = async (groupId: string, song: Song) => {
+  return await updateDoc(db.group(groupId), {
+    songs: arrayRemove(song)
+  });
+}
+
+const normalizeName = (name: string ) => name.replaceAll(" ", "-").normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()
+
+export { getGroups, getGroup, addSong, addGroup, updateSong, updateGroup, deleteGroup, deleteSong, normalizeName}

@@ -3,15 +3,26 @@
 import Link from "next/link";
 import { DBGroup } from "../types"
 import style from "./style.module.css"
+import { deleteGroup } from "../util";
 
 export default function ListItem({spex} : {spex: DBGroup}) {
-    const deleteSpex = () => {
+    const deleteSpex = async () => {
         const spexName = prompt(`Do you really want to delete the spex '${spex.data.name}'? (Type the spex name to confirm)`)
 
         if(spexName != spex.data.name) return alert("Delete aborted");
 
         // Delete spex
-        alert("Delete not implemented yet")
+        try {
+            await deleteGroup(spex.id);
+        } catch(e) {
+            alert(e);
+            alert("Om det var en permissions-error prova att logga ut och in igen");
+            return;
+        }
+
+        alert("Spex has been deleted, this is final. Update the website with the changes to remove from the site.")
+   
+        window.location.reload();
     }
 
     return (

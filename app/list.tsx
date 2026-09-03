@@ -11,7 +11,7 @@ function GroupBox({group}: {group: DBGroup}) {
     <Link href={`/spex/${group.id}`}>
         <div className={`${styles.group}`}>
           <p className={styles.groupTitle}>{groupData.name}</p>
-          <p className={styles.groupInfo}>Spex - {groupData.year ? groupData.year: "Alla"}</p>
+          <p className={styles.groupInfo}>{groupData.year ? groupData.year: "Alla"}</p>
         </div>
     </Link>
     
