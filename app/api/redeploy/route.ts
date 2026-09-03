@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.GITHUB_PAT}`,
+        Authorization: `Bearer ${process.env.GH_PAT}`,
         Accept: "application/vnd.github+json",
       },
       body: JSON.stringify({ event_type: "redeploy" }),
