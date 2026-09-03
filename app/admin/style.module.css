@@ -250,6 +250,24 @@
   border-color: #ff3822;
 }
 
+
+.howToButton {
+  padding: 0.4em 0.9em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #888;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.howToButton:hover {
+  color: #3b3332;
+  border-color: #3b3332;
+}
+
 .topBarButtons {
   display: flex;
   gap: 0.5em;

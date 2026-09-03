@@ -9,6 +9,7 @@ import { app } from "../firebase";
 import Login from "./Login";
 import { DBGroup } from "../types";
 import { httpsCallable, getFunctions, HttpsCallableResult, connectFunctionsEmulator } from "firebase/functions";
+import Link from "next/link";
 
 const auth = getAuth(app);
 const functions = getFunctions(app);
@@ -82,6 +83,9 @@ export default function Admin() {
                 <button className={style.signOutButton} onClick={() => auth.signOut()}>
                     Sign out
                 </button>
+                <Link className={style.howToButton} href="/admin/howto.pdf">
+                    How to spexbibel
+                </Link>
             </div>
             </div>
             <div className={style.spexList}>
